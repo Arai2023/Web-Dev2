@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,3 +71,77 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Todo List</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    #todo-list {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .todo-item {
+        margin-bottom: 5px;
+    }
+</style>
+</head>
+<body>
+
+<div id="todo-list">
+    <h2>Todo List</h2>
+    <input type="text" id="new-item" placeholder="Enter a new task">
+    <button onclick="addItem()">Add</button>
+    <ul id="todo-items"></ul>
+</div>
+
+<script>
+    let todos = [];
+
+    function renderTodoList() {
+        const todoList = document.getElementById("todo-items");
+        todoList.innerHTML = "";
+        todos.forEach((todo, index) => {
+            const listItem = document.createElement("li");
+            listItem.className = "todo-item";
+            listItem.innerHTML = `
+                <input type="checkbox" onchange="toggleDone(${index})" ${todo.done ? "checked" : ""}>
+                <span>${todo.text}</span>
+                <button onclick="deleteItem(${index})">Delete</button>
+            `;
+            todoList.appendChild(listItem);
+        });
+    }
+
+    function addItem() {
+        const newItemInput = document.getElementById("new-item");
+        const newItemText = newItemInput.value.trim();
+        if (newItemText !== "") {
+            todos.push({ text: newItemText, done: false });
+            newItemInput.value = "";
+            renderTodoList();
+        }
+    }
+
+    function toggleDone(index) {
+        todos[index].done = !todos[index].done;
+        renderTodoList();
+    }
+
+    function deleteItem(index) {
+        todos.splice(index, 1);
+        renderTodoList();
+    }
+
+    // Initial rendering
+    renderTodoList();
+</script>
+
+</body>
+</html>
+>>>>>>> 62cd72700393a6ca0ec6cccc0bf1cb189c3e1771
