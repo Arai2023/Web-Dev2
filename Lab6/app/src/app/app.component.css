@@ -1,34 +1,21 @@
-ul, li{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-
+body {
+  padding: 0;
+  margin: 0;
 }
 
-a {
-    text-decoration: none;
-    color: black;
-    margin:24px;
-    font-weight: bold;
+.top-bar {
+  overflow: hidden;
 }
 
-ul{
-    display: flex;
-    text-decoration: none;
+.top-bar a {
+  float: left;
+  color: black;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 3px;
 }
 
-li{
-    width: 100px;
-    height: 25px;
-    padding: 10px;
-    margin: 10px;
-    background-color: #f699d5;
-    color:black;
-    border:1px solid black;
-    border-radius: 30px;
-}
-
-.knopochki{
-    margin-left: 530px;
-    list-style: none;
+.top-bar a:hover {
+  background-color: #e8e6e6;
 }

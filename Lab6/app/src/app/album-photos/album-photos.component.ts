@@ -1,35 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { Photo } from '../models';
-import { AlbumsService } from '../albums.service';
-import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, RouterLink} from '@angular/router';
+import { Photos } from "../models";
+import { AlbumService } from "../albums.service";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-album-photos',
   standalone: true,
   imports: [
-    CommonModule
+    RouterLink,
+    NgForOf
   ],
   templateUrl: './album-photos.component.html',
   styleUrl: './album-photos.component.css'
 })
 export class AlbumPhotosComponent implements OnInit{
-  photos !: Photo[]
+  gallery: Photos[];
+  id: number;
 
-  constructor(
-    private route : ActivatedRoute,
-    private albumsService : AlbumsService
-    ){ }
+  constructor(private route: ActivatedRoute, private albumService: AlbumService) {
+    this.gallery = [];
+    this.id = 0;
+  }
 
-  ngOnInit(){
-    this.route.paramMap.subscribe(params => {
-      if(params.get('id')){
-        const id = Number(params.get('id'));
-        
-        this.albumsService.getPhotos(id).subscribe(photos => {
-          this.photos = photos
-        })
-      }
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      const id = Number(params.get('id'));
+      this.albumService.getPhoto(id).subscribe((photo) => {
+        this.gallery = photo;
+      })
     })
   }
 }
